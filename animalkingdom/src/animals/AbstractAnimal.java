@@ -5,10 +5,9 @@ abstract class AbstractAnimal{
     protected String name;
     protected int yearNamed;
 
-    public AbstractAnimal(String name, int yearNamed, int id){
+    public AbstractAnimal(String name, int yearNamed){
         this.name = name;
         this.yearNamed = yearNamed;
-        this.id = id;
     }
 
     //Abstract Methods

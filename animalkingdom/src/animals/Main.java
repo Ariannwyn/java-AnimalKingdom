@@ -3,6 +3,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
+
+    private static List<AbstractAnimal> filterAnimals(List<AbstractAnimal> animals, CheckAnimals tester)
+    {
+        List<AbstractAnimal> tempList = new ArrayList<>();
+        for (AbstractAnimal a : animals){
+            if (tester.test(a)){
+                tempList.add(a);
+            }
+        }
+        return tempList;
+    }
     public static void main(String[] args){
         ////////////////////////
         //      VARIABLES     //
@@ -47,23 +58,48 @@ public class Main {
         animalList.add(catfish);
         animalList.add(perch);
 
-        //Prints entire list
-        System.out.println(animalList);
+        System.out.println("\n*** MVP ***");
+        System.out.println("List all the animals in descending order by year named");
+        animalList.sort((o1, o2) -> o2.getYearNamed() - o1.getYearNamed());
+        animalList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
         System.out.println();
-        System.out.println("\n*** Sort List ***");
-        //Sort names alphabetically and log them
-        animalList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
-        animalList.forEach((o) -> System.out.println(o.getName()));
 
+        System.out.println("List all the animals alphabetically");
+        animalList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        animalList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("List all the animals order by how they move");
+        animalList.sort((o1, o2) -> o1.getMovement().compareToIgnoreCase(o2.getMovement()));
+        animalList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("List only those animals the breathe with lungs");
+        List<AbstractAnimal> lungList = filterAnimals(animalList, a -> a.getBreath().equals("Lungs"));
+        lungList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("List only those animals that breath with lungs and were named in 1758");
+        List<AbstractAnimal> yearlungList = filterAnimals(animalList, a -> (a.getBreath().equals("Lungs")) && (a.getYearNamed() == 1758));
+        yearlungList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("List only those animals that lay eggs and breathe with lungs");
+        List<AbstractAnimal> egglungList = filterAnimals(animalList, a -> (a.getBreath().equals("Lungs")) && (a.getReproduction().equals("Eggs")));
+        egglungList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("List alphabetically only those animals that were named in 1758");
+        List<AbstractAnimal> yearList = filterAnimals(animalList, a -> a.getYearNamed() == 1758);
+        yearList.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        yearList.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
+
+        System.out.println("\n*** Stretch ***");
+        System.out.println("For the list of animals, list alphabetically those animals that are mammals.");
+        List<AbstractAnimal> mammal = filterAnimals(animalList, a -> a.getMovement().equals("Walk"));
+        mammal.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        mammal.forEach((o) -> System.out.println(o.getName() + " " + o.getReproduction() + " " + o.getMovement() + " " + o.getBreath() + " " + o.getYearNamed()));
+        System.out.println();
     }
 }
-
-//SORT
-//  List all the animals in descending order by year named
-//  List all the animals alphabetically
-//  List all the animals order by how they move
-//  List only those animals the breath with lungs
-//  List only those animals that breath with lungs and were named in 1758
-//  List only those animals that lay eggs and breath with lungs
-//  List alphabetically only those animals that were named in 1758
-//  For the list of animals, list alphabetically those animals that are mammals.

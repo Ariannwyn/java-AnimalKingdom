@@ -2,8 +2,8 @@ package animals;
 
 public class Fish extends AbstractAnimal {
 
-    public Fish (String name, int yearNamed, int id){
-        super(name, yearNamed, id);
+    public Fish (String name, int yearNamed){
+        super(name, yearNamed);
     }
 
     @Override
